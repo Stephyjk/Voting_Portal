@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-5 infobox">
+  <br>
+  <h3>Create Candidate Profile</h3>
+  <br>
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-danger" role="alert">
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+  <br>
+  <div class="col-8 jumbotron">
+  <form method="POST" action="{% url 'create' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+      {{form.as_p}}
+      <tr>
+        <td colspan='2'>
+          <br>
+          <input class="btn btn-success" type="submit" name="submit" value="Create Profile">
+        </td>
+      </tr>
+    </table>
+
+
+  </form>
+
+</div>
+
+</div>
+<div class="col-3 infobox">
+  <img src="/static/kenya2.jpg" alt="" width="400" height="300">
+  <br><br><br><br><br><br><br>
+</div>
+
+
+
+
+{% endblock %}

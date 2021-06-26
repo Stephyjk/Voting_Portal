@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+<br>
+<div class="col-5 alert alert-danger" role="alert">
+  {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+<br>
+<h3>Please Vote Below</h3>
+<br>
+
+<form class="" action="{% url 'vote' position.id %}" method="POST">
+  {% csrf_token %}
+  {% for candidate in position.candidate_set.all %}
+  <div class="form-check">
+    <input type="radio" name="candidate" value="{{ candidate.id }}" class="form-check-input" id="candidate{{ forloop.counter }}">
+    <label for="candidate{{ forloop.counter }}"> {{ candidate.title }} </label>
+
+  </div>
+  {%endfor%}
+  <br>
+  <input type="submit" value="Vote" class="btn btn-success"> &nbsp
+  <a class="btn btn-success" href="{% url 'votepage' %}">Back To Voting Main Page</a>
+
+</form>
+
+<br><br><br><br>
+{% endblock %}

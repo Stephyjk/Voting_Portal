@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+{% if messages %}
+{% for message in messages %}
+<div class="col-7 alert alert-danger" role="alert">
+  {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+<br>
+<br>
+<div class="">
+  <img src="/static/kenya2.jpg" >
+  <br><br><br><br><br><br><br>
+</div>
+
+
+
+
+{% endblock %}

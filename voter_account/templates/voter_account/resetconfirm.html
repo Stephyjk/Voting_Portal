@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <br>
+  <h3>Reset Password</h3>
+  <br>
+  <p>Please enter your new password twice. Verify that you have typed them in correctly.</p>
+
+  <form method="POST">
+    {% csrf_token %}
+
+    {{form.as_p}}
+    <br>
+    <br>
+    <input class="btn btn-success" type="submit" value="Update Password">
+  </form>
+
+
+</div>
+
+
+{% endblock %}

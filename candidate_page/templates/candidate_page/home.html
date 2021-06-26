@@ -1,7 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- {% if error %}
+<br>
+<br>
+<font color='red'>
+  <h4>{{ error }}</h4>
+</font>
 
-Home!
+<br>
+<br>
+{% endif %} -->
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
+
+<br>
+<h2 style="color:green;">Hello, {{request.user.get_full_name }}</h2>
+<h3>Thank you for registering to vote at the KIJA portal!</h3>
+<br>
+<div>
+  <h4>Please pay attention the following:</h4>
+  <ul>
+    <li>To register as a candidate, click on the 'Register as a candidate' link and follow the instructions before <font style="color:red;">2021/07/17</font></li>
+    <li>To vote for your preferred candidates, click on the 'vote' link and follow the instructions</li>
+    <li>You can only vote once therefore confirm before you submit your vote</li>
+    <li>The registration period ends on <font style="color:red;">2021/07/18</font></li>
+    <li>The voting period ends on <font style="color:red;">2021/07/31</font></li>
+    <li>You can check the results as they are updated by clicking the 'Results' link</li>
+
+  </ul>
+</div>
+
+
+
 
 {% endblock %}

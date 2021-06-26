@@ -2,36 +2,33 @@
 
 {% block content %}
 
-{% if error %}
-
-{{ error }}
-<br>
-<br>
-{% endif %}
-
-
-
-<h1>Sign Up!</h1>
-
-<form method="POST" action="{% url 'signup' %}">
-
-  {% csrf_token %}
-  Username:
+<div class="jumbotron">
   <br>
-  <input type="text" name="username">
+  <h3>Voter Registration</h3>
+
+  {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+  {% endif %}
   <br>
-  Password:
-  <br>
-  <input type="password" name="password1">
-  <br>
-  Confirm Password:
-  <br>
-  <input type="password" name="password2">
-  <br>
-  <br>
-  <input class="btn btn-primary" type="submit" name="submit" value="Sign Up!">
+
+  <!-- <div class="infobox"> -->
+    <form method="POST" action="{% url 'signup' %}">
+      {% csrf_token %}
+
+      {{form.as_p}}
+      <input class="btn btn-success" type="submit" name="submit" value="SignUp">
+    </form>
+    <br><br><br>
+</div>
 
 
-</form>
+<!-- </div> -->
+<!-- <div class="infobox">
+  <img src="/static/kenya2.jpg" alt="">
+  <br><br>
+</div> -->
+
 
 {% endblock %}

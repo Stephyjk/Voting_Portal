@@ -16,9 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from candidate_page import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    path('', views.main, name='main'),
+    path('home', views.home, name='home'),
     path('voter_account/', include('voter_account.urls')),
-]
+    path('candidate_page/', include('candidate_page.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.site.site_header = "KIJA 2021 Online Voting System"
+admin.site.index_title = "Welcome to KIJA'S 2021 online voting system admin panel"
+admin.site.site_title = "KIJA 2021 OVS"

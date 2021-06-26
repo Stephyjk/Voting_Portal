@@ -1,32 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-{% if error %}
-
-{{ error }}
-<br>
-<br>
+<!-- <div class="infobox"> -->
+<div class="jumbotron">
+{% if messages %}
+{% for message in messages %}
+  <div class="alert alert-danger" role="alert">
+      {{ message }}
+  </div>
+{% endfor %}
 {% endif %}
 
-
-<h1>Login</h1>
-
-<form method="POST" action="{% url 'login' %}">
-
-  {% csrf_token %}
-  Username:
   <br>
-  <input type="text" name="username">
+  <h1>Voter Login</h1>
   <br>
-  Password:
-  <br>
-  <input type="password" name="password">
-  <br>
-  <br>
-  <input class="btn btn-primary" type="submit" name="submit" value="Login">
+  <form method="POST" action="{% url 'login' %}">
+
+    {% csrf_token %}
+    <div class="col-3 form-group">
+        <label for="username">Username:</label>
+        <input type="text" name="username" class="form-control" id="username" required>
+    </div>
+    <br>
+    <div class="col-3 form-group">
+      <label for="password">Password:</label>
+      <input type="password" name="password" class="form-control" id="password" required>
+    </div>
+<br>
+<br>
+    <input class="btn btn-success" type="submit" name="submit" value="Login">
+
+  </form>
+  <br><br>
+  <span>Forgot Password? &nbsp</span><a href="{% url 'reset_password' %}">  Reset Password</a>
+   </div>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br> -->
+  <!-- </div> -->
 
 
-</form>
 
 {% endblock %}

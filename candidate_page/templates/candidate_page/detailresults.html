@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-danger" role="alert">
+  {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+<br>
+
+<h1>{{ position.position }}</h1>
+<br>
+<div class="col-6">
+  <ul class="list-group mb-5">
+  	{% for candidate in position.candidate_set.all %}
+  	<li class="list-group-item">
+  		{{ candidate.title }}:  <span style="color:blue"> &nbsp  &nbsp  &nbsp  &nbsp  &nbsp &nbsp  &nbsp  &nbsp  &nbsp  &nbsp
+        &nbsp &nbsp  &nbsp  &nbsp  &nbsp  &nbsp &nbsp &nbsp  &nbsp  &nbsp  &nbsp  &nbsp
+        &nbsp &nbsp  &nbsp  &nbsp  &nbsp  &nbsp &nbsp &nbsp  &nbsp  &nbsp  &nbsp  &nbsp
+         {{ candidate.total_vote }} vote{{ candidate.total_vote | pluralize }}</span>
+  	</li>
+  	{% endfor %}
+  </ul>
+
+
+  <a class="btn btn-success" href="{% url 'votepage' %}">Back To Voting Main Page</a>
+
+</div>
+
+
+
+{% endblock %}

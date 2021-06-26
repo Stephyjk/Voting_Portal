@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<a class="btn btn-success" href="{% url 'votepage' %}">Back To Voting Main Page</a>
+<br>
+<br>
+
+<h4>Running Candidates</h4>
+<br>
+
+{% for candidate in candidates.all %}
+
+<div class="col-8 jumbotron">
+  <br>
+  <table class="table">
+    <tr>
+      <td><img src="{{ candidate.image.url }}" width="220" height="280" class="img-fluid"></td>
+    </tr>
+    <tr>
+      <td>
+        <p><strong>Name:</strong> &nbsp {{ candidate.title }}</p>
+        <p><strong>Position:</strong>&nbsp {{ candidate.position }}</p>
+        <p><strong>Profile:</strong>&nbsp {{ candidate.body }}</p>
+      </td>
+    </tr>
+  </table>
+</div>
+
+{% endfor %}
+
+{% endblock %}

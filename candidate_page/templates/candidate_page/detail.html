@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<h4>Candidate Registration Details</h4>
+<br>
+{% if messages %}
+    {% for message in messages %}
+    <div class="col-7 alert alert-success" role="alert">
+      {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
+
+<div class="col-8 jumbotron">
+  <table class="table">
+    <tr>
+      <td><img src="{{ candidate.image.url }}" width="220" height="280" class="img-fluid"></td>
+    </tr>
+    <tr>
+      <td>
+        <p><strong>Name:</strong> &nbsp {{ candidate.title }}</p>
+        <p><strong>Position:</strong>&nbsp {{ candidate.position }}</p>
+        <p><strong>Profile:</strong>&nbsp {{ candidate.body }}</p>
+      </td>
+    </tr>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+  <h2 class="text-center">KIJA 2021 Election Results</h2>
+  <br>
+  <table class="table table-hover table-active text-center">
+    <thead >
+      <tr>
+        <th>Candidate Name</th>
+        <th>Candidate Position</th>
+        <th>Total Vote</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for candidate in candidates %}
+        <tr>
+          <td>{{ candidate.title }}</td>
+          <td>{{ candidate.position }}</td>
+          <td>{{ candidate.total_vote }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endblock %}
