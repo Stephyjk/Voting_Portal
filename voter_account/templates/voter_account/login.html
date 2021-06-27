@@ -14,23 +14,26 @@
   <br>
   <h1>Voter Login</h1>
   <br>
-  <form method="POST" action="{% url 'login' %}">
+  <div>
+    <form method="POST" action="{% url 'login' %}">
 
-    {% csrf_token %}
-    <div class=" form-group">
-        <label for="username">Username:</label>
-        <input type="text" name="username" class="form-control" id="username" required>
-    </div>
-    <br>
-    <div class=" form-group">
-      <label for="password">Password:</label>
-      <input type="password" name="password" class="form-control" id="password" required>
-    </div>
-<br>
-<br>
-    <input class="btn btn-success" type="submit" name="submit" value="Login">
+      {% csrf_token %}
+      <div class=" form-group">
+          <label for="username">Username:</label>
+          <input type="text" name="username" class="form-control" id="username" required>
+      </div>
+      <br>
+      <div class=" form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" class="form-control" id="password" required>
+      </div>
+  <br>
+  <br>
+      <input class="btn btn-success" type="submit" name="submit" value="Login">
 
-  </form>
+    </form>
+  </div>
+
   <br><br>
   <a href="{% url 'reset_password' %}">  Reset Password</a>
    </div>

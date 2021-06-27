@@ -13,13 +13,15 @@
   {% endif %}
   <br>
 
-  <!-- <div class="infobox"> -->
+  <div >
     <form method="POST" action="{% url 'signup' %}">
       {% csrf_token %}
 
       {{form.as_p}}
       <input class="btn btn-success" type="submit" name="submit" value="SignUp">
     </form>
+  </div>
+
     <br><br><br>
 </div>
 
