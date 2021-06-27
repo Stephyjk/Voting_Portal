@@ -8,7 +8,7 @@
   <br>
   {% if position_list %}
     {% for position in position_list.all %}
-      <div class="col-8 card mb-3">
+      <div class="card mb-3">
         <div class="card-body">
           <p>{{ position.position }}</p>
           <a href="{% url 'votedetail' position.id %}" class="btn btn-success btn-sm">Vote Now</a>

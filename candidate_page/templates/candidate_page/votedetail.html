@@ -5,7 +5,7 @@
 {% if messages %}
 {% for message in messages %}
 <br>
-<div class="col-5 alert alert-danger" role="alert">
+<div class="alert alert-danger" role="alert">
   {{ message }}
 </div>
 {% endfor %}
@@ -14,7 +14,7 @@
 <h3>Please Vote Below</h3>
 <br>
 
-<form class="" action="{% url 'vote' position.id %}" method="POST">
+<form action="{% url 'vote' position.id %}" method="POST">
   {% csrf_token %}
   {% for candidate in position.candidate_set.all %}
   <div class="form-check">

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="col-5 infobox">
+<div class="infobox">
   <br>
   <h3>Create Candidate Profile</h3>
   <br>
@@ -13,7 +13,7 @@
   {% endfor %}
   {% endif %}
   <br>
-  <div class="col-8 jumbotron">
+  <div class="jumbotron">
   <form method="POST" action="{% url 'create' %}" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
@@ -31,10 +31,6 @@
 
 </div>
 
-</div>
-<div class="col-3 infobox">
-  <img src="/static/kenya2.JPG" alt="" width="400" height="300">
-  <br><br><br><br><br><br><br>
 </div>
 
 
