@@ -18,7 +18,7 @@ class Candidate(models.Model):
     account = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     position=models.ForeignKey(Position, on_delete=models.CASCADE)
     body=models.TextField(verbose_name='About', help_text='Write a brief introduction of yourself')
-    total_vote = models.IntegerField(default=0)
+    total_vote = models.IntegerField(default=0, editable=False)
 
     def __str__(self):
         return self.title
