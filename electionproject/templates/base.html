@@ -83,12 +83,12 @@
       <div class="container-fluid ">
         {% if user.is_authenticated %}
         <a class="navbar-brand" href="{% url 'home' %}">
-        <img src="{% static 'kija0.png' %}" height=50 width=70 class="d-inline-block align-top">
+        <img src="/static/kija0.png" height=50 width=70 class="d-inline-block align-top">
         KIJA 2021 Official Voting Portal
         </a>
         {% else %}
         <a class="navbar-brand" href="{% url 'main' %}">
-        <img src="{% static 'kija0.png' %}" height=50 width=70 class="d-inline-block align-top">
+        <img src="/static/kija0.png" height=50 width=70 class="d-inline-block align-top">
         KIJA 2021 Official Voting Portal
         </a>
         {% endif %}
@@ -137,7 +137,7 @@
 
   </body>
   <footer>
-      <img src="static/kija3.png">
+      <img src="/static/kija3.png">
       <span> KIJA <br> &copy; {%now "Y"%}</span>
   </footer>
 
