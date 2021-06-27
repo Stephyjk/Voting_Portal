@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="infobox">
   <br>
   <h3>Create Candidate Profile</h3>
   <br>
@@ -9,9 +8,9 @@
   {% for message in messages %}
   <div class="alert alert-danger" role="alert">
     {{ message }}
-  </div>
   {% endfor %}
   {% endif %}
+  <br>
   <br>
   <div class="jumbotron">
   <form method="POST" action="{% url 'create' %}" enctype="multipart/form-data">
