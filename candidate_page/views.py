@@ -26,31 +26,31 @@ def home(request):
 
 @login_required(login_url='/voter_account/signup')
 def create(request):
-    reglimit = datetime.date(2021, 7, 10)
-    tday = datetime.date.today()
-    if tday >= reglimit:
-        messages.warning(request, 'Sorry, the registration period has ended!')
-        return redirect('regend')
+    # reglimit = datetime.date(2021, 7, 10)
+    # tday = datetime.date.today()
+    # if tday >= reglimit:
+    #     messages.warning(request, 'Sorry, the registration period has ended!')
+    #     return redirect('regend')
+    # else:
+    form = CreateNewCandidate()
+    if Candidate.objects.filter(account=request.user).exists():
+        messages.warning(request, 'You have already registered for a position!')
+        return render(request, 'candidate_page/create.html', {'form':form})
     else:
-        form = CreateNewCandidate()
-        if Candidate.objects.filter(account=request.user).exists():
-            messages.warning(request, 'You have already registered for a position!')
-            return render(request, 'candidate_page/create.html', {'form':form})
-        else:
-            if request.method == 'POST':
-                form = CreateNewCandidate(request.POST or None, request.FILES or None)
-                if form.is_valid():
-                     instance = form.save(commit=False)
-                     instance.account = request.user
-                     instance.save()
-                     messages.success(request, 'You have successfully registered as a candidate!')
-                     return redirect('/candidate_page/' + str(instance.id))
-                else:
-                     return render(request, 'candidate_page/create.html', {'form':form, 'error': 'All fields are required'})
-
+        if request.method == 'POST':
+            form = CreateNewCandidate(request.POST or None, request.FILES or None)
+            if form.is_valid():
+                 instance = form.save(commit=False)
+                 instance.account = request.user
+                 instance.save()
+                 messages.success(request, 'You have successfully registered as a candidate!')
+                 return redirect('/candidate_page/' + str(instance.id))
             else:
-                 form = CreateNewCandidate()
-            return render(request, 'candidate_page/create.html', {'form':form})
+                 return render(request, 'candidate_page/create.html', {'form':form, 'error': 'All fields are required'})
+
+        else:
+             form = CreateNewCandidate()
+        return render(request, 'candidate_page/create.html', {'form':form})
 
 
 @login_required(login_url='/voter_account/signup')

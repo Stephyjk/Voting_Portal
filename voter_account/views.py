@@ -14,28 +14,28 @@ import datetime
 User = get_user_model()
 
 def votersignup(request):
-    reglimit = datetime.date(2021, 7, 14)
-    tday = datetime.date.today()
-    if tday >= reglimit:
-        messages.warning(request, 'Sorry, the registration period has ended!')
-        return redirect('signend')
+    # reglimit = datetime.date(2021, 7, 14)
+    # tday = datetime.date.today()
+    # if tday >= reglimit:
+    #     messages.warning(request, 'Sorry, the registration period has ended!')
+    #     return redirect('signend')
+    # else:
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            if data['password'] == data['confirm_password']:
+                voter = form.save(commit=False)
+                voter.set_password(voter.password)
+                voter.save()
+                messages.success(request, 'You have been registered successfully!')
+                return redirect('login')
+            else:
+                return render(request, 'voter_account/signup.html', {'form':form, 'error':'Passwords must match'})
     else:
-        if request.method == 'POST':
-            form = SignupForm(request.POST)
-            if form.is_valid():
-                data = form.cleaned_data
-                if data['password'] == data['confirm_password']:
-                    voter = form.save(commit=False)
-                    voter.set_password(voter.password)
-                    voter.save()
-                    messages.success(request, 'You have been registered successfully!')
-                    return redirect('login')
-                else:
-                    return render(request, 'voter_account/signup.html', {'form':form, 'error':'Passwords must match'})
-        else:
-            form = SignupForm()
+        form = SignupForm()
 
-        return render(request, 'voter_account/signup.html', {'form':form})
+    return render(request, 'voter_account/signup.html', {'form':form})
 
 
 def signend(request):
