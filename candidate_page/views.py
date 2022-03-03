@@ -6,7 +6,7 @@ from .forms import CreateNewCandidate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import get_user_model
 from django.contrib import messages
-from django.contrib.auth import login,logout,authenticate, update_session_auth_hash
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.urls import reverse
 from django.template import loader
 import datetime
@@ -14,6 +14,8 @@ import datetime
 User = get_user_model()
 
 # Create your views here.
+
+
 def main(request):
     return render(request, 'voter_account/main.html')
 
@@ -34,23 +36,26 @@ def create(request):
     # else:
     form = CreateNewCandidate()
     if Candidate.objects.filter(account=request.user).exists():
-        messages.warning(request, 'You have already registered for a position!')
-        return render(request, 'candidate_page/create.html', {'form':form})
+        messages.warning(
+            request, 'You have already registered for a position!')
+        return render(request, 'candidate_page/create.html', {'form': form})
     else:
         if request.method == 'POST':
-            form = CreateNewCandidate(request.POST or None, request.FILES or None)
+            form = CreateNewCandidate(
+                request.POST or None, request.FILES or None)
             if form.is_valid():
-                 instance = form.save(commit=False)
-                 instance.account = request.user
-                 instance.save()
-                 messages.success(request, 'You have successfully registered as a candidate!')
-                 return redirect('/candidate_page/' + str(instance.id))
+                instance = form.save(commit=False)
+                instance.account = request.user
+                instance.save()
+                messages.success(
+                    request, 'You have successfully registered as a candidate!')
+                return redirect('/candidate_page/' + str(instance.id))
             else:
-                 return render(request, 'candidate_page/create.html', {'form':form, 'error': 'All fields are required'})
+                return render(request, 'candidate_page/create.html', {'form': form, 'error': 'All fields are required'})
 
         else:
-             form = CreateNewCandidate()
-        return render(request, 'candidate_page/create.html', {'form':form})
+            form = CreateNewCandidate()
+        return render(request, 'candidate_page/create.html', {'form': form})
 
 
 @login_required(login_url='/voter_account/signup')
@@ -72,12 +77,12 @@ def regend(request):
 
 @login_required(login_url='/voter_account/signup')
 def votepage(request):
-    votestart = datetime.date(2020, 7, 21 )
-    voteend = datetime.date(2021, 7, 28 )
+    votestart = datetime.date(2020, 7, 21)
+    voteend = datetime.date(2023, 7, 28)
     tday = datetime.date.today()
-    if tday >= votestart and tday <=voteend:
+    if tday >= votestart and tday <= voteend:
         position_list = Position.objects
-        return render(request, 'candidate_page/votepage.html', {'position_list':position_list})
+        return render(request, 'candidate_page/votepage.html', {'position_list': position_list})
     elif tday <= votestart:
         messages.warning(request, 'Sorry, voting will start on 2021/07/18 !')
         return redirect('regend')
@@ -92,20 +97,22 @@ def votedetail(request, position_id):
         position = Position.objects.get(pk=position_id)
     except Position.DoesNotExist:
         raise Http404('Position does not exist')
-    return render(request, 'candidate_page/votedetail.html', {'position':position})
+    return render(request, 'candidate_page/votedetail.html', {'position': position})
 
 
 @login_required(login_url='/voter_account/signup')
 def vote(request, position_id):
     sposition = get_object_or_404(Position, pk=position_id)
     if request.method == "POST":
-        voter = Vresults.objects.get_or_create(account=request.user, position=sposition)[0]
+        voter = Vresults.objects.get_or_create(
+            account=request.user, position=sposition)[0]
         if voter.status == False:
             try:
-                selected_candidate = sposition.candidate_set.get(pk=request.POST['candidate'])
+                selected_candidate = sposition.candidate_set.get(
+                    pk=request.POST['candidate'])
             except (KeyError, Candidate.DoesNotExist):
                 messages.warning(request, 'You did not select a candidate')
-                return render(request, 'candidate_page/votedetail.html', {'position':sposition})
+                return render(request, 'candidate_page/votedetail.html', {'position': sposition})
             else:
                 selected_candidate.total_vote += 1
                 selected_candidate.save()
@@ -114,9 +121,9 @@ def vote(request, position_id):
                 return HttpResponseRedirect(reverse('detailresults', args=(position_id,)))
         else:
             messages.warning(request, 'You already voted for this position!')
-            return render(request, 'candidate_page/votedetail.html', {'position':sposition})
+            return render(request, 'candidate_page/votedetail.html', {'position': sposition})
     else:
-        return render(request, 'candidate_page/votedetail.html', {'position':sposition})
+        return render(request, 'candidate_page/votedetail.html', {'position': sposition})
 
 
 @login_required(login_url='/voter_account/signup')
@@ -127,5 +134,5 @@ def detailresults(request, position_id):
 
 @login_required(login_url='/voter_account/signup')
 def results(request):
-    candidates = Candidate.objects.all().order_by('position','-total_vote')
+    candidates = Candidate.objects.all().order_by('position', '-total_vote')
     return render(request, 'candidate_page/results.html', {'candidates': candidates})
