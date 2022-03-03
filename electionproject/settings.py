@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'electionproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd35dqtau1a0hsd',
-        'USER': 'pgfmbstnkplava',
-        'PASSWORD': '868a7b0d165f7f484db9adab9a14bd49bc33db0922fa8e1c9802202e45461034',
-        'HOST': 'ec2-54-157-160-218.compute-1.amazonaws.com',
+        'NAME': 'name',
+        'USER': 'user',
+        'PASSWORD': 'password',
+        'HOST': 'host',
         'PORT': '5432',
     }
 }
