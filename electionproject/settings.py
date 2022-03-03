@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -79,10 +80,10 @@ WSGI_APPLICATION = 'electionproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'electionprojectdb',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'NAME': 'd5l5rn3jgj031e',
+        'USER': 'czebvvvohlecfe',
+        'PASSWORD': '262bac30a83d9a47bd795f859f375bd1466ff3cbdbeeafabb473893d7c8f6007',
+        'HOST': 'ec2-54-157-160-218.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -128,6 +129,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'electionproject/static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
+django_heroku.settings(locals())
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

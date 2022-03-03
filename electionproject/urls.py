@@ -15,11 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
 from candidate_page import views
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,10 +26,6 @@ urlpatterns = [
     path('voter_account/', include('voter_account.urls')),
     path('candidate_page/', include('candidate_page.urls')),
 
-    url(r'^media/(?P<path>.*)$', serve,
-        {'document_root':       settings.MEDIA_ROOT}),
-    url(r'^static/(?P<path>.*)$', serve,
-        {'document_root': settings.STATIC_ROOT}),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = "KIJA 2021 Online Voting System"
